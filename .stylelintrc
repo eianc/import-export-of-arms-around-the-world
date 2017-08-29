@@ -1,0 +1,3 @@
+{
+    "extends": "@zonedigital/stylelint-config-zone",
+}

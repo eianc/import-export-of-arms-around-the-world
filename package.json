@@ -1,0 +1,56 @@
+{
+  "name": "@zonedigital/fe-boilerplate",
+  "title": "Zone FE: Core",
+  "version": "4.0.3",
+  "description": "Front-end boilerplate to kick start all projects at Zone",
+  "author": {
+    "name": "Zone",
+    "url": "https://zonedigital.com"
+  },
+  "contributors": [
+    "Richard Bultitude",
+    "Mike Simmonds",
+    "Alex Baulch"
+  ],
+  "repository": "bitbucket:thisiszone/fe-boilerplate",
+  "scripts": {
+    "watch": "webpack-dev-server",
+    "build": "webpack --progress --hide-modules"
+  },
+  "homepage": "https://bitbucket.org/thisiszone/fe-boilerplate",
+  "bugs": "https://bitbucket.org/thisiszone/fe-boilerplate/issues",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "browser-sync": "^2.18.8",
+    "browser-sync-webpack-plugin": "^1.1.4"
+  },
+  "dependencies": {
+    "@zonedigital/eslint-config-zone": "^0.0.2",
+    "@zonedigital/stylelint-config-zone": "^0.0.3",
+    "autoprefixer": "^6.3.6",
+    "babel-core": "^6.10.4",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "circular-dependency-plugin": "^3.0.0",
+    "clean-webpack-plugin": "^0.1.15",
+    "css-loader": "^0.28.0",
+    "d3": "^4.8.0",
+    "eslint": "^3.11.1",
+    "eslint-loader": "^1.3.0",
+    "extract-text-webpack-plugin": "^2.0.0",
+    "jquery": "^3.2.1",
+    "node-sass": "^4.5.0",
+    "postcss-loader": "^1.1.1",
+    "sass-loader": "^6.0.0",
+    "simple-pagination.js": "^1.6.0",
+    "style-loader": "^0.17.0",
+    "stylelint-webpack-plugin": "^0.7.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1",
+    "webpack-manifest-plugin": "^1.1.0",
+    "webpack-merge": "^4.1.0"
+  }
+}

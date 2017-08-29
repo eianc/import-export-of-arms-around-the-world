@@ -1,0 +1,22 @@
+// --------------------------------------------------------------------------
+// Border-box Grid
+// --------------------------------------------------------------------------
+// Author:      Zone
+// Email:       frontend@zonedigital.com
+// URL:         http://zonedigital.com
+// Copyright:   Copyright (c) 2016, zonedigital.com. All rights reserved.
+// Version:     1.5
+// --------------------------------------------------------------------------
+
+
+@mixin col($i, $includeGutter: true) {
+    float: left;
+    width: percentage(($column-width * $i) / $container-width);
+
+    @if $includeGutter {
+        padding: 0 $gutter / 2;
+    }
+    @else {
+        padding: 0;
+    }
+}

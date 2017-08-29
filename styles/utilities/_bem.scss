@@ -1,0 +1,88 @@
+// --------------------------------------------------------------------------
+// BEM mixins
+// --------------------------------------------------------------------------
+// Author:      Zone
+// Email:       frontend@zonedigital.com
+// URL:         http://zonedigital.com
+// Copyright:   Copyright (c) 2016, zonedigital.com. All rights reserved.
+// Version:     1.1
+// --------------------------------------------------------------------------
+
+$bem-element-separator: '__' !default;
+$bem-modifier-separator: '--' !default;
+
+// BEM: Block (New)
+@mixin new($name, $description: '') {
+    @if $description != '' {
+        $description: ': ' + $description;
+    }
+
+    // Global variable to be passed to has mixin
+    $bem-block: $name !global;
+
+    @at-root {
+        // #{$name}#{$description}
+        .#{$name} {
+            @content;
+        }
+    }
+}
+
+// BEM: Element (Has)
+@mixin has($name) {
+    $selector: nth(#{&}, 1);
+
+    @if str-index($selector, $bem-element-separator) {
+        @error '#{$selector} is already an element';
+    }
+
+    // If selector is modified add $bem-block prefix not $selector prefix
+    @if str-index($selector, $bem-modifier-separator) {
+        .#{$bem-block}#{$bem-element-separator}#{$name} {
+            @content;
+        }
+    } @else {
+        &#{$bem-element-separator}#{$name} {
+            @content;
+        }
+    }
+}
+
+// BEM: Modifier (When)
+@mixin when($name) {
+    $selector: nth(#{&}, 1);
+
+    @if str-index(#{&}, $bem-modifier-separator) {
+        @error '#{$selector} is already modified';
+    }
+
+    @if str-index(#{&}, $bem-element-separator) {
+        @error '#{$selector} is an element so it cannot be modified';
+    }
+
+    // Add the modifier and rules
+    &#{$bem-modifier-separator}#{$name} {
+        @extend #{$selector};
+
+        @content;
+    }
+}
+
+// EXAMPLE BEM USAGE
+
+// @include new('widget', 'B42 - Carousel') {
+//     background: $color-white;
+
+//     @include has('title') {
+//         color: $color-grey;
+//         font-size: 1.5em;
+//         font-weight: 600;
+//     }
+
+//     @include when('big') {
+
+//         @include has('title') {
+//              font-size: 3em;
+//         }
+//     }
+// }

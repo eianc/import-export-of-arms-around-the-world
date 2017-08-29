@@ -1,0 +1,52 @@
+// --------------------------------------------------------------------------
+// Buttons
+// --------------------------------------------------------------------------
+// Author:      Zone
+// Email:       frontend@zonedigital.com
+// URL:         http://zonedigital.com
+// Copyright:   Copyright (c) 2016, zonedigital.com. All rights reserved.
+// Version:     1.5
+// --------------------------------------------------------------------------
+
+
+// Base button styles
+// --------------------------------------------------------------------------
+
+[role='button'] {
+    border: 0 none;
+    font-size: 14px;
+    padding: 8px;
+
+    & > .icon {
+        // icon styles here
+    }
+
+    & > .text {
+        // text styles
+    }
+
+    &:hover {
+        // hover styles
+        & > .icon {
+            // hover icon styles
+        }
+    }
+}
+
+.btn-cta {
+    @include hoverActiveFocus(background-color, $color-purple) {
+        background-color: $color-grey;
+    }
+}
+
+
+// Base control styles
+// --------------------------------------------------------------------------
+
+[role='button'][rel='prev'],
+[role='button'][rel='next'] {
+    // Text
+    & .text {
+        // button controls styles
+    }
+}

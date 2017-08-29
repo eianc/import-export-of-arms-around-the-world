@@ -1,0 +1,108 @@
+// --------------------------------------------------------------------------
+// Core
+// --------------------------------------------------------------------------
+// Author:      Mike Simmonds
+// URL:         http://zonedigital.com
+// Copyright:   Copyright (c) 2017, zonedigital.com. All rights reserved.
+// Version:     4
+// --------------------------------------------------------------------------
+
+@import 'utilities/reset';
+
+body {
+    color: #111;
+    font-family: 'Helvetica Neue', sans-serif;
+    line-height: 1.4;
+}
+
+a {
+    background-color: #eee;
+    border-radius: .2rem;
+    color: #555;
+    display: inline-block;
+    padding: 0 .25rem;
+    text-decoration: none;
+    transition: all .2s;
+
+    &:hover,
+    &:active {
+        background-color: #424297;
+        color: #fff;
+    }
+}
+
+p + p {
+    margin-top: .5rem;
+}
+
+.demo {
+    margin: 2rem auto;
+    max-width: 30rem;
+
+    &__logo {
+        display: block;
+        height: 100px;
+        margin: 1rem auto;
+        width: 100px;
+    }
+
+    &__title {
+        font-size: 1.8rem;
+        font-weight: 300;
+        margin: 3rem 0 .5rem;
+        text-align: center;
+    }
+
+    &__modules {
+        box-sizing: border-box;
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    &__module {
+        box-sizing: border-box;
+        display: flex;
+        min-height: 10rem;
+        padding: .5rem;
+        width: 50%;
+    }
+
+    &__footer {
+        color: #999;
+        font-size: .9rem;
+        margin-top: 2rem;
+        text-align: center;
+    }
+}
+
+.module {
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: .3rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+
+    &__logo {
+        display: block;
+        width: auto;
+        max-height: 4rem;
+        margin: .5rem 0 1.25rem;
+    }
+
+    &__name {
+        font-weight: bold;
+        margin-bottom: .25rem;
+    }
+
+    &__description {
+        color: #999;
+        font-size: .9rem;
+    }
+
+    &__copy {
+        text-align: center;
+    }
+}

@@ -1,0 +1,197 @@
+// --------------------------------------------------------------------------
+// Animations
+// --------------------------------------------------------------------------
+// Author:      Dominic da Costa @ Zone
+// Email:       frontend@zonedigital.com
+// URL:         http://zonedigital.com
+// Copyright:   Copyright (c) 2016, zonedigital.com. All rights reserved.
+// Version:     1.5
+// --------------------------------------------------------------------------
+
+
+// Fade In
+// --------------------------------------------------------------------------
+
+.animate--fade {
+    animation: fadeIn .65s ease 1 normal;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+// Rotate
+// --------------------------------------------------------------------------
+
+.animate--rotate {
+    animation: rotate .65s ease 1 normal;
+}
+
+.animate--rotate-reverse {
+    animation: rotate .65s ease 1 alternate;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+
+// Move Up
+// --------------------------------------------------------------------------
+
+.animate--move {
+    animation: moveUp .65s ease 1 normal;
+}
+
+@keyframes moveUp {
+    0% {
+        opacity: 0;
+        transform: translateY(200px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+// Scale Up
+// --------------------------------------------------------------------------
+
+.animate--scale {
+    animation: scaleUp .65s ease-in-out 1 normal;
+}
+
+@keyframes scaleUp {
+    0% {
+        opacity: 0;
+        transform: scale(.6);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+// Fall Perspective
+// --------------------------------------------------------------------------
+
+.animate--fall {
+    animation: fall .8s ease-in-out 1 normal;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateZ(400px) translateY(300px) rotateX(-90deg);
+        transform-style: preserve-3d;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateZ(0) translateY(0) rotateX(0deg);
+    }
+}
+
+
+// Fly
+// --------------------------------------------------------------------------
+
+.animate--fly {
+    animation: fly .8s ease-in-out 1 normal;
+}
+
+@keyframes fly {
+    0% {
+        transform: rotateX(-180deg);
+        transform-origin: 50%, 50%, -300px;
+        transform-style: preserve-3d;
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotateX(0deg);
+    }
+}
+
+
+// Flip
+// --------------------------------------------------------------------------
+
+.animate--flip {
+    animation: flip .8s ease-in-out 1 normal;
+}
+
+@keyframes flip {
+    0% {
+        transform: rotateX(-80deg);
+        transform-origin: 0%, 0%;
+        transform-style: preserve-3d;
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotateX(0deg);
+    }
+}
+
+
+// Helix
+// --------------------------------------------------------------------------
+
+.animate--helix {
+    animation: helix .8s ease-in-out 1 normal;
+}
+
+@keyframes helix {
+    0% {
+        transform: rotateY(-180deg);
+        transform-style: preserve-3d;
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotateY(0deg);
+    }
+}
+
+
+// FullHouse
+// --------------------------------------------------------------------------
+
+.animate--fullhouse {
+    animation: fullhouse .8s ease-in 1 normal;
+}
+
+@keyframes fullhouse {
+    0% {
+        transform: scale(.4);
+        transform-style: preserve-3d;
+    }
+
+    70% {
+        animation-timing-function: ease-out;
+        opacity: .8;
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

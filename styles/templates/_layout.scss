@@ -1,0 +1,62 @@
+// --------------------------------------------------------------------------
+// Layout
+// --------------------------------------------------------------------------
+// Author:      Zone
+// Email:       frontend@zonedigital.com
+// URL:         http://zonedigital.com
+// Copyright:   Copyright (c) 2016, zonedigital.com. All rights reserved.
+// Version:     1.7
+// --------------------------------------------------------------------------
+
+// Utility
+// --------------------------------------------------------------------------
+
+// Prevent css transitions from running on load //
+.preload * {
+    transition: none;
+}
+
+body {
+    position: relative;
+}
+
+// Wrapper
+// --------------------------------------------------------------------------
+
+.wrapper {
+    margin: 0 auto;
+    max-width: px($grid-full-width-pixels);
+    padding: $spacing 0;
+}
+
+.article {
+    @extend %clearfix;
+}
+
+.article__subsection {
+    @include col(6, false);
+
+    padding: 20px 0;
+
+    @media all and (max-width: 700px) {
+        @include col(12, false);
+
+        padding: 20px 0;
+
+        & + & {
+            border-top: 1px solid $color-grey;
+            margin-top: 20px;
+        }
+    }
+}
+
+// Examples
+// --------------------------------------------------------------------------
+
+.mySelector {
+    background-color: $color-purple;
+}
+
+.myJQuerySelector {
+    background-color: $color-white;
+}

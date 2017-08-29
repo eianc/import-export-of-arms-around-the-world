@@ -1,0 +1,131 @@
+// --------------------------------------------------------------------------
+// Mixins
+// --------------------------------------------------------------------------
+// Author:      Zone
+// Email:		frontend@thisiszone.com
+// URL:			http://thisiszone.com
+// Copyright:	Copyright (c) 2015, thisiszone.com. All rights reserved.
+// Version:		1.5
+// --------------------------------------------------------------------------
+
+
+// Hide text/els
+// --------------------------------------------------------------------------
+
+@mixin text-off-screen {
+    text-indent: -999em;
+}
+
+@mixin el-off-screen {
+    left: -999em;
+    position: absolute;
+}
+
+
+// Inputs
+// --------------------------------------------------------------------------
+
+@mixin placeholder() {
+    &.placeholder {
+        @content;
+    }
+
+    &:-moz-placeholder {
+        @content;
+    }
+
+    &::-moz-placeholder {
+        @content;
+    }
+
+    &::-webkit-input-placeholder {
+        @content;
+    }
+}
+
+// Rems with fallback
+// --------------------------------------------------------------------------
+
+@function rem($size) {
+    @return ($size / 16px) * 1rem;
+}
+
+@mixin font-size($size) {
+    font-size: $size;
+    font-size: rem($size);
+}
+
+
+// Hacks & polyfills
+// --------------------------------------------------------------------------
+
+@mixin padding-hack-wrapper($width: 100, $svgWidth: 500, $svgHeight: 200) {
+    height: 0;
+    padding-top: (($svgHeight / $svgWidth) * $width) * 1%;
+    position: relative;
+    width: percentage($width / $width);
+}
+
+@mixin padding-hack-inner-el {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+
+// Basic interactions
+// --------------------------------------------------------------------------
+
+@mixin hoverActiveFocus($property: visibility, $value: visible) {
+    &:hover,
+    &:active,
+    &:focus {
+        $property: $value;
+
+        @content;
+    }
+}
+
+
+// Positioning
+// --------------------------------------------------------------------------
+
+@mixin center($horizontal: true, $vertical: true) {
+    @if $horizontal == true and $vertical == false {
+        left: 50%;
+        position: absolute;
+        top: 0;
+        transform: translateX(-50%);
+
+        .lt-ie9 & {
+            top: 0;
+        }
+    } @else if $horizontal == false and $vertical == true {
+        left: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        .lt-ie9 & {
+            top: 0;
+        }
+    } @else if $horizontal == true and $vertical == true {
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        .lt-ie9 & {
+            top: 0;
+        }
+    }
+}
+
+@mixin no-center {
+    left: auto;
+    position: relative;
+    top: auto;
+    transform: none;
+}

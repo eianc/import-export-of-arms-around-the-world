@@ -1,0 +1,22 @@
+// --------------------------------------------------------------------------
+// Widget
+// --------------------------------------------------------------------------
+// Author:      Zone
+// Email:       frontend@zonedigital.com
+// URL:         http://zonedigital.com
+// Copyright:   Copyright (c) 2016, zonedigital.com. All rights reserved.
+// Version:     1.5
+// --------------------------------------------------------------------------
+
+
+// Wrapper
+// --------------------------------------------------------------------------
+
+.script-loading-examples {
+    @extend %basic-box;
+
+    border: 1px solid $color-grey;
+    border-radius: 6px;
+    margin: 18px 0;
+    text-align: center;
+}

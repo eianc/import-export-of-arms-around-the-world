@@ -1,0 +1,32 @@
+// --------------------------------------------------------------------------
+// Header
+// --------------------------------------------------------------------------
+// Author:      Zone
+// Email:       frontend@zonedigital.com
+// URL:         http://zonedigital.com
+// Copyright:   Copyright (c) 2016, zonedigital.com. All rights reserved.
+// Version:     1.5
+// --------------------------------------------------------------------------
+
+
+// Accessibility controls
+// --------------------------------------------------------------------------
+
+.skip {
+    display: block;
+    float: left;
+    margin-left: -999em;
+    padding: 12px;
+
+    &:focus {
+        margin-left: 0;
+    }
+}
+
+
+// Header
+// --------------------------------------------------------------------------
+
+.header-main {
+    padding: 12px;
+}

@@ -1,0 +1,30 @@
+// --------------------------------------------------------------------------
+// Header
+// --------------------------------------------------------------------------
+// Author:      Zone
+// Email:       frontend@zonedigital.com
+// URL:         http://zonedigital.com
+// Copyright:   Copyright (c) 2016, zonedigital.com. All rights reserved.
+// Version:     1.0
+// --------------------------------------------------------------------------
+
+.main-nav {
+    border-bottom: 1px solid $color-grey;
+
+    .wrapper {
+        align-items: flex-start;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+    }
+}
+
+.main-nav__link {
+    display: block;
+    flex-basis: 1;
+    padding: 0 10px;
+
+    @supports not (flex-wrap: wrap) {
+        display: inline-block;
+    }
+}

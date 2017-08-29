@@ -1,0 +1,88 @@
+// --------------------------------------------------------------------------
+// Sematic Fluid Grid
+// --------------------------------------------------------------------------
+// Author:      Zone
+// Email:       frontend@thisiszone.com
+// URL:         http://thisiszone.com
+// Copyright:   Copyright (c) 2015, thisiszone.com. All rights reserved.
+// Version:     1.5
+// --------------------------------------------------------------------------
+
+
+$column-width: $grid-width-columns;
+$gutter-width: $grid-width-gutter;
+$columns: $grid-num-columns;
+
+// Utility function — you should never need to modify this
+@function gridsystem-width($columns: $columns) {
+    @return $column-width * $columns + $gutter-width * $columns;
+}
+
+// Set $total-width to 100% for a fluid layout
+$total-width: 100%;
+
+$min-width: 1000;
+$correction: .5 / $min-width * 100 * 1%;
+
+body {
+    width: 100%;
+}
+
+@mixin row($columns: $columns) {
+    @include clearfix;
+
+    display: block;
+    margin-left: $total-width * $gutter-width * .5 / gridsystem-width($columns) * -1;
+    margin-right: $total-width * $gutter-width * .5 / gridsystem-width($columns) * -1;
+    width: $total-width * ($gutter-width + gridsystem-width($columns)) / gridsystem-width($columns);
+}
+
+@mixin column($x, $columns: $columns) {
+    display: inline;
+    float: left;
+    margin-left: $total-width * $gutter-width * .5 / gridsystem-width($columns);
+    margin-right: $total-width * $gutter-width * .5 / gridsystem-width($columns);
+    width: $total-width * (($gutter-width + $column-width) * $x - $gutter-width) / gridsystem-width($columns);
+}
+
+@mixin column-alpha($x, $columns: $columns) {
+    display: inline;
+    float: left;
+    margin-left: 0;
+    margin-right: $total-width * $gutter-width * .5 / gridsystem-width($columns);
+    width: $total-width * (($gutter-width + $column-width) * $x - $gutter-width / 2) / gridsystem-width($columns);
+}
+
+@mixin column-omega($x, $columns: $columns) {
+    display: inline;
+    float: left;
+    margin-left: $total-width * $gutter-width * .5 / gridsystem-width($columns);
+    margin-right: 0;
+    width: $total-width * (($gutter-width + $column-width) * $x - $gutter-width / 2) / gridsystem-width($columns);
+}
+
+@mixin push($offset: 1) {
+    margin-left: $total-width * ($gutter-width + $column-width) * $offset / gridsystem-width($columns) + $total-width * $gutter-width * .5 / gridsystem-width($columns);
+}
+
+@mixin pull($offset: 1) {
+    margin-right: $total-width * ($gutter-width + $column-width) * $offset / gridsystem-width($columns) + $total-width * $gutter-width * .5 / gridsystem-width($columns);
+}
+
+@mixin no-column {
+    display: block;
+    float: none;
+    margin: 0 auto;
+    width: 100%;
+}
+
+@mixin columns-indent($cols, $push, $pull) {
+    @include column($cols);
+    @include push($push);
+    @include pull($pull);
+}
+
+%flow-in-grid {
+    display: inline;
+    float: left;
+}
