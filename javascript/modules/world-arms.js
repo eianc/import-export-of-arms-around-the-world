@@ -1,28 +1,15 @@
 import * as d3 from 'd3';
 import calculateMax from './calculate-max';
+import {width, height, exportGroup, importGroup} from './containers';
+import createBalloons from './create-balloons';
 
-let width = (window.innerWidth * 47) / 100;
-let height = window.innerHeight - 100;
+// function forceCollide(scaleRadius, activity) {
 
-
+// }
 
 export default function arms() {
 
-	let exportsChart = d3.select('#export').append('svg')
-                     .attr('width', width).attr('height', height);
-
-  let importsChart = d3.select('#import').append('svg')
-							       .attr('width', width).attr('height', height);
-
-  let yearsTrade = d3.select('#years');
-  let exportsSVG = d3.select('#export svg');
-  let importsSVG = d3.select('#import svg');
-
-  /// create the group for the Exports
-  let armsExport = exportsSVG.append('g').attr('transform', 'translate(20,20)');
-
-  /// create the group for the Imports
-  let armsImport = importsSVG.append('g').attr('transform', 'translate(20,20)');
+  const yearsTrade = d3.select('#years');
 
   d3.json('/json/world_arms_import_export_by_year_R.json', function(error, json) {
   	if (error) throw error;
@@ -30,16 +17,12 @@ export default function arms() {
 
     let maximum = calculateMax(data);
 
-      /// create the scale for the radius
-      let scaleRadius = d3.scaleSqrt().domain([0, maximum]).range([0,150]);
+    /// create the scale for the radius
+    let scaleRadius = d3.scaleSqrt().domain([0, maximum]).range([0,150]);
 
-    console.log(scaleRadius, 'scaleRadius');
-
-    /// set-up the forces
-    let forceX = d3.forceX(width / 2).strength(0.6);
-    let forceY = d3.forceY(height / 2).strength(0.4);
     let forceExportCollide = d3.forceCollide(function(d) { return scaleRadius(d.exported) + 2; });
-    let forceImportCollide = d3.forceCollide(function(d) { return scaleRadius(d.imported) + 2; });
+    let forceImportCollide = d3.forceCollide(function(d) { return scaleRadius(d.imported) + 2; });  
+
     let currentYear;
 
     /// getting the data entries array only for a year
@@ -101,8 +84,8 @@ export default function arms() {
         /// clear the svg group 
         d3.selectAll('svg g > *').remove();
         /// calling the export and import functions
-        exportFN(newData);
-        importFN(newData);
+        createBalloons(newData, forceExportCollide, exportGroup, 'exported', scaleRadius);
+        createBalloons(newData, forceImportCollide, importGroup, 'imported', scaleRadius);
 
         if ( (index > 3) && (index < (buttonListLength - 4))) {
 
@@ -142,90 +125,9 @@ export default function arms() {
       }
     });
 
-  	/// Create the circles for each country that exports arms
-  	function exportFN(data) {
-      
-      /// Force simulation for Export
-      let simulationExport = d3.forceSimulation()
-        .force('x', forceX)
-        .force('y', forceY)
-        .force('collide', forceExportCollide);
-
-      let balloonsExport = armsExport.selectAll('.balloon')
-    						          .data(data)
-    						          .enter().append('circle')
-                          .attr('r', function(d) { return scaleRadius(d.exported); })
-            		          .attr('fill', function(d) { return colorFill(d); })
-    	
-      /// append the title for each country that exports
-      balloonsExport.append('title').text(function(d) { return d.country + ' ' + d.exported; });
-      
-      /// remove the circles that have the export 0
-      balloonsExport.filter(function(d) { return d.exported === '0'; }).remove();
-
-      simulationExport.nodes(data)
-        .on('tick', function() {
-          ticked(balloonsExport);
-        });
-    }
-    exportFN(newData);
-
-    /// Create the circles for each country that imports arms
-    function importFN(data) {
-      /// Force simulation for Import
-      let simulationImport = d3.forceSimulation()
-        .force('x', forceX)
-        .force('y', forceY)
-        .force('collide', forceImportCollide);
-  
-      let ballonsImport = armsImport.selectAll('.balloon')
-                          .data(data)
-                          .enter().append('circle')
-                          .attr('r', function (d) { return scaleRadius(d.imported); })
-                          .attr('fill', function(d) { return colorFill(d); });
-      
-      /// append the title for each country that imports
-      ballonsImport.append('title').text(function(d) { return d.country; });
-
-      /// remove the circles that have the import 0
-      ballonsImport.filter(function (d) { return d.imported === '0'; }).remove();
-
-      simulationImport.nodes(data)
-        .on('tick', function () {
-          ticked(ballonsImport);
-        });
-    }
-    importFN(newData);
-
-    /// color fill function based on continent
-    function colorFill(d) {
-      if (d.continent === 'Europe') {
-        return '#119EAC';
-      } else if (d.continent === 'Asia') {
-        return '#FEDE25';
-      } else if (d.continent === 'Africa') {
-        return '#EB6C23';
-      } else if (d.continent === 'North America') {
-        return '#C64671';
-      } else if (d.continent === 'South America') {
-        return '#75457C';
-      } else if (d.continent === 'Oceania') {
-        return '#114483';
-      }
-    }
-
-    /// this is used by the simulation for the import and export
-    function ticked(balloon) {
-      balloon
-        .attr('cx', function(d) {
-          return d.x;
-        })
-        .attr('cy', function(d) {
-          return d.y;
-        })
-    }  
+    createBalloons(newData, forceExportCollide, exportGroup, 'exported', scaleRadius);
+    createBalloons(newData, forceImportCollide, importGroup, 'imported', scaleRadius);
 
   });
-
 
 };
