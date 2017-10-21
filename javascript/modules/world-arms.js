@@ -1,7 +1,10 @@
 import * as d3 from 'd3';
+import calculateMax from './calculate-max';
 
 let width = (window.innerWidth * 47) / 100;
 let height = window.innerHeight - 100;
+
+
 
 export default function arms() {
 
@@ -23,40 +26,14 @@ export default function arms() {
 
   d3.json('/json/world_arms_import_export_by_year_R.json', function(error, json) {
   	if (error) throw error;
-  	let data = json;
- 	
-    /// calculate the maximum Export on each year
-    let maxExportYears = json.map(function (obj) {
-      let maxByYear = []
-        obj.entries.map( function(entry) {
-          maxByYear.push(parseFloat(entry.exported));
-        })
-        var sum = d3.sum(maxByYear, function(d) { return d; })
-      return d3.max(maxByYear, function(d) { return d; });
-    });
+    let data = json; 
 
-    /// calculate the maximum Export across all years
-    let maxExport = d3.max(maxExportYears, function(d) {return d;} );
+    let maximum = calculateMax(data);
 
-    /// calculate the maximum Import on each year
-    let maxImportYears = json.map(function (obj) {
-      let maxByYear = []
-        obj.entries.map( function(entry) {
-          maxByYear.push(parseFloat(entry.imported));
-        })
-        var sum = d3.sum(maxByYear, function(d) { return d; })
-      return d3.max(maxByYear, function(d) { return d; });
-    });
-    
-    /// calculate the maximum Import across all years
-    let maxImport = d3.max(maxImportYears, function(d) {return d;} );
+      /// create the scale for the radius
+      let scaleRadius = d3.scaleSqrt().domain([0, maximum]).range([0,150]);
 
-    /// calculate the maximum between maxExport and maxImport
-    let maximum = d3.max([maxExport, maxImport], function(d) {return d;});
-
-    /// create the scale for the radius
-    let scaleRadius = d3.scaleSqrt().domain([0, maximum]).range([0,150]);
-
+    console.log(scaleRadius, 'scaleRadius');
 
     /// set-up the forces
     let forceX = d3.forceX(width / 2).strength(0.6);
@@ -76,10 +53,9 @@ export default function arms() {
       })
       return entriesByYear;
     };
-    console.log(currentYear, 'currentYear');
+
     /// save the entries by year in this newData variable
     let newData = dataEntries(data, undefined);
-    console.log(currentYear, 'currentYear');
     
     /// append the years list to the DOM
     let yearlist = yearsTrade.selectAll('li')
@@ -95,8 +71,7 @@ export default function arms() {
     let buttonList = yearlist._groups[0];
     let buttonListLength = buttonList.length;
     let buttonListMiddle = Math.floor(buttonList.length / 2);
-    console.log(buttonList[10].className, 'buttonList');
-
+    
     buttonList.map(function(list, index) {
       
       function addActiveClass(id, currentYear) {
@@ -122,7 +97,7 @@ export default function arms() {
 
         currentYear = list.dataset.id;
         addActiveClass(list.dataset.id, currentYear);
-        console.log('currentYear', currentYear);
+
         /// clear the svg group 
         d3.selectAll('svg g > *').remove();
         /// calling the export and import functions
