@@ -15,7 +15,7 @@ function colorFill(d) {
     } else if (d.continent === 'South America') {
         return '#75457C';
     } else if (d.continent === 'Oceania') {
-        return '#009CDF';
+        return '#0064df';
     }
 }
 

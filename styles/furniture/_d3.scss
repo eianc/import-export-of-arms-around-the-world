@@ -16,7 +16,7 @@ main {
     display: flex;
     align-content: center;
     align-items: center;
-    height: 100%;
+    height: calc(100% - 30px);
     background-color: #1d2927;
 
     #import {
@@ -60,4 +60,45 @@ main {
             outline: 0 none;
         }
     }
+}
+
+.legend {
+    height: 30px;
+    background-color: #1d2927;
+}
+
+.legend__color {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px 0 20px;
+    border-radius: 50%;
+}
+
+.legend__color--asia {
+    background-color: #FEDE25;
+}
+
+.legend__color--africa {
+    background-color: #EB6C23;
+}
+
+.legend__color--europe {
+    background-color: #119EAC;
+}
+
+.legend__color--north-america {
+    background-color: #C64671;
+}
+
+.legend__color--south-america {
+    background-color: #75457C;
+}
+
+.legend__color--oceania {
+    background-color: #0064df;
+}
+
+.legend__continent {
+    display: inline-block;
 }
