@@ -1,8 +1,3 @@
-![Zone](https://www.zonedigital.com/static/zone/assets/img/icons/zone-logo.png)
-
-----
-
-# Zone Boilerplate
 
 ## Project structure
 
