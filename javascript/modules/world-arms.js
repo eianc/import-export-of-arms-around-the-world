@@ -1,19 +1,14 @@
 import * as d3 from 'd3';
-import {width, height, exportGroup, importGroup} from './containers';
+import {exportGroup, importGroup} from './containers';
 import getRadiusRange from './radius-range';
 import createBalloons from './create-balloons';
 import {rebuildVisualisation, getEntriesByYear} from './rebuild-visualisation';
 import {calculateForceCollide} from './calculate-forces';
 
-// function forceCollide(scaleRadius, activity) {
-
-// }
-
 export default function arms() {
 
-  d3.json('/json/world_arms_import_export_by_year_R.json', function(error, json) {
-  	if (error) throw error;
-    let data = json; 
+  d3.json('/json/world_arms_import_export_by_year_R.json').then(function(json) {
+    let data = json;
 
     let scaleRadius = getRadiusRange(data);
 
@@ -28,6 +23,9 @@ export default function arms() {
 
     rebuildVisualisation(data, scaleRadius);
 
+  }).catch(function(error) {
+    console.error('Could not load arms data', error);
   });
 
-};
+}
+

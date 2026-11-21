@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import {width, height, exportGroup, importGroup} from './containers';
+import {exportGroup, importGroup} from './containers';
 import createBalloons from './create-balloons.js';
 import {calculateForceCollide} from './calculate-forces';
 
@@ -26,7 +26,7 @@ function getEntriesByYear(data, year = '2016') {
         }
     });
     return entriesByYear;
-};
+}
 
 function rebuildVisualisation(data, scaleRadius) {
 
@@ -43,7 +43,7 @@ function rebuildVisualisation(data, scaleRadius) {
         .text(function(d) { return d.year; });
 
     /// getting the list with the buttons containing the years
-    let buttonList = yearlist._groups[0];
+    let buttonList = yearlist.nodes();
     let buttonListLength = buttonList.length;
     let buttonListMiddle = Math.floor(buttonList.length / 2);
 
@@ -85,7 +85,6 @@ function rebuildVisualisation(data, scaleRadius) {
 
             if ( (index > 3) && (index < (buttonListLength - 4))) {
             
-                let currentYearIndex = index;
                 let nextSibling = index + 1;
                 let prevSibling = index - 1;
                 let nextThirdSibling = index + 3;
