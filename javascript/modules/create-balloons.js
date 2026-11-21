@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import {width, height} from './containers';
 import {forceX, forceY} from './calculate-forces';
 
 /// color fill function based on continent

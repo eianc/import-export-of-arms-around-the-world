@@ -16,8 +16,8 @@ const appendGroupTo = function (container) {
         .attr('transform', 'translate(20,20)');
 };
 
-const exportsChart = appendSVGTo('#export');
-const importsChart = appendSVGTo('#import');
+appendSVGTo('#export');
+appendSVGTo('#import');
 
 const exportsSVG = d3.select('#export svg');
 const importsSVG = d3.select('#import svg');
